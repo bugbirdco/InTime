@@ -1,0 +1,21 @@
+{
+    "name": "bugbirdco/in-time",
+    "description": "Resolve DateInterval spec expressions into total seconds, minutes, hours, etc.",
+    "type": "library",
+    "license": "BSD-3-Clause",
+    "require": {
+        "php": "^7.2",
+        "ext-date": "^7.2"
+    },
+    "authors": [
+        {
+            "name": "Jordan Bugbird",
+            "email": "jordan@bugbird.co"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "BugbirdCo\\InTime\\": "lib/"
+        }
+    }
+}
