@@ -21,8 +21,12 @@ use Exception;
  */
 class InTime extends DateInterval
 {
+
     /**
+     * Create an InTime from a DateInterval
+     *
      * @param DateInterval $interval
+     * @return InTime
      * @throws Exception
      */
     public static function fromDateInterval(\DateInterval $interval)
@@ -64,7 +68,7 @@ class InTime extends DateInterval
      *
      * @see DateInterval::createFromDateString()
      * @param string $dateString
-     * @return DateInterval
+     * @return InTime
      * @throws Exception
      */
     public static function fromString(string $dateString)
