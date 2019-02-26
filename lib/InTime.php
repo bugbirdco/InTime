@@ -22,6 +22,27 @@ use Exception;
 class InTime extends DateInterval
 {
     /**
+     * @param DateInterval $interval
+     * @throws Exception
+     */
+    public static function fromDateInterval(\DateInterval $interval)
+    {
+        $emptyInTime = new self('PT0S');
+
+        $emptyInTime->y = $interval->y;
+        $emptyInTime->m = $interval->m;
+        $emptyInTime->d = $interval->d;
+        $emptyInTime->h = $interval->h;
+        $emptyInTime->i = $interval->i;
+        $emptyInTime->s = $interval->s;
+        $emptyInTime->f = $interval->f;
+        $emptyInTime->invert = $interval->invert;
+        $emptyInTime->days = $interval->days;
+
+        return $emptyInTime;
+    }
+
+    /**
      * Create a new InTime from a DateInterval Expression
      * E.g.
      * InTime::fromExpression('P3D');
@@ -44,10 +65,11 @@ class InTime extends DateInterval
      * @see DateInterval::createFromDateString()
      * @param string $dateString
      * @return DateInterval
+     * @throws Exception
      */
     public static function fromString(string $dateString)
     {
-        return self::createFromDateString($dateString);
+        return self::fromDateInterval(self::createFromDateString($dateString));
     }
 
     /**
