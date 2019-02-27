@@ -198,7 +198,7 @@ class InTime extends DateInterval
      *
      * @param string $expression
      * @param null $timezone
-     * @return DateTime
+     * @return \Carbon\Carbon
      * @throws Exception
      */
     public function inCarbon($expression = 'now', $timezone = null)
