@@ -179,6 +179,18 @@ class InTime extends DateInterval
     }
 
     /**
+     * Get a new DateTime from now (or the DateTime string expression at $expression)
+     * based on the expression.
+     *
+     * @return DateTime
+     * @throws Exception
+     */
+    public function inDateTime($expression = 'now')
+    {
+        return (new DateTime($expression))->add($this);
+    }
+
+    /**
      * @return float|int
      * @throws Exception
      */
