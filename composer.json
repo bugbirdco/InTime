@@ -13,6 +13,9 @@
             "email": "jordan@bugbird.co"
         }
     ],
+    "suggest": {
+        "nesbot/carbon": "Required to use the inCarbon method"
+    },
     "autoload": {
         "psr-4": {
             "BugbirdCo\\InTime\\": "lib/"

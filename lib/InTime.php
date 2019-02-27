@@ -182,12 +182,28 @@ class InTime extends DateInterval
      * Get a new DateTime from now (or the DateTime string expression at $expression)
      * based on the expression.
      *
+     * @param string $expression
+     * @param null $timezone
      * @return DateTime
      * @throws Exception
      */
-    public function inDateTime($expression = 'now')
+    public function inDateTime($expression = 'now', $timezone = null)
     {
-        return (new DateTime($expression))->add($this);
+        return (new DateTime($expression, $timezone))->add($this);
+    }
+
+    /**
+     * Get a new Carbon object from now (or the DateTime string expression at $expression)
+     * based on the expression.
+     *
+     * @param string $expression
+     * @param null $timezone
+     * @return DateTime
+     * @throws Exception
+     */
+    public function inCarbon($expression = 'now', $timezone = null)
+    {
+        return (new \Carbon\Carbon($expression, $timezone))->add($this);
     }
 
     /**
