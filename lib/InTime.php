@@ -187,7 +187,7 @@ class InTime extends DateInterval
      * @return DateTime
      * @throws Exception
      */
-    public function inDateTime($expression = 'now', $timezone = null)
+    public function inDateTimeFrom($expression, $timezone = null)
     {
         return (new DateTime($expression, $timezone))->add($this);
     }
@@ -201,7 +201,7 @@ class InTime extends DateInterval
      * @return \Carbon\Carbon
      * @throws Exception
      */
-    public function inCarbon($expression = 'now', $timezone = null)
+    public function inCarbonFrom($expression, $timezone = null)
     {
         return (new \Carbon\Carbon($expression, $timezone))->add($this);
     }
