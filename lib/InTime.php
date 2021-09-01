@@ -106,7 +106,7 @@ class InTime extends DateInterval
     }
 
     /**
-     * @return mixed
+     * @return int
      * @throws Exception
      */
     public function inSeconds()
