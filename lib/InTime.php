@@ -220,4 +220,61 @@ class InTime extends DateInterval
 
         return ($interval->format('%y') * 12) + ($interval->format('%m'));
     }
+    
+    /**
+     * Returns the interval object in as an expression, ready to be
+     * consumed by static::fromExpression, or anyting else accepting the format.
+     * We automatically return P0Y if the interval is 0 or has only microseconds
+     * (which is a limitation of the format).
+     * This also automatically converts weeks into 7 days.
+     *
+     * @return string
+     */
+    public function toExpression()
+    {
+        // The elements of an expression
+        $elements = [
+            // It must start with a P (period).
+            // Weeks are not represented in the format, so we must convert a week to 7 days.
+            'P' => ['Y' => 'y', 'M' => 'm', 'D' => ['d' => 1, 'w' => 7]],
+            // T (time) sets are optional and have to contain at last one of the time fields.
+            'T' => ['H' => 'h', 'M' => 'i', 'S' => 's']
+        ];
+        $expression = '';
+
+        foreach ($elements as $set => $setElements) {
+            // Add the set character to the result
+            $expression .= $set;
+            foreach ($setElements as $field => $attr) {
+                // If $attr is an array, then we need to add together multiple elements to satisfy the $key field
+                if (is_array($attr)) {
+                    $total = 0;
+                    foreach ($attr as $subAttr => $multiple) {
+                        if (!empty($this->$subAttr)) {
+                            // Get the element and times it by the multiple for the represented field value
+                            $total += $this->$subAttr * $multiple;
+                        }
+                    }
+                    // Only add if there is something to represent
+                    if ($total > 0) {
+                        $expression .= "{$total}{$field}";
+                    }
+
+                    // Only add if there is something to represent
+                } else if (!empty($this->$attr)) {
+                    $expression .= "{$this->$attr}{$field}";
+                }
+            }
+        }
+
+        // If this expression is empty, fix it
+        if ($expression == 'PT') $expression = 'P0Y';
+
+        // If the expression ends in a T, remove it
+        if (preg_match('/T$/', $expression)) {
+            $expression = substr($expression, 0, strlen($expression) - 1);
+        }
+
+        return $expression;
+    }
 }
