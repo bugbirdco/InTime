@@ -4,8 +4,8 @@
     "type": "library",
     "license": "BSD-3-Clause",
     "require": {
-        "php": "^7.2",
-        "ext-date": "^7.2"
+        "php": ">=7.2",
+        "ext-date": "*"
     },
     "authors": [
         {
